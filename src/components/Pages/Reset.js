@@ -44,7 +44,6 @@ const Reset = () => {
       setLoading(true);
 
       await Auth.forgotPassword(email);
-      console.log('forgotPassword');
 
       setLoading(false);
       setStage(1);
@@ -61,7 +60,6 @@ const Reset = () => {
 
     Auth.forgotPasswordSubmit(email, auth_code, password)
       .then(data => {
-        console.log(data);
         setLoading(false);
       })
       .then(() => navigate('/signin'))

@@ -14,7 +14,6 @@ const SignIn = props => {
   const [loading, setLoading] = useState(false);
 
   const handleUpdate = event => {
-    console.log(`${event.target.name}: ${event.target.value}`);
 
     if (event.target.name === 'email') {
       setEmail(event.target.value);

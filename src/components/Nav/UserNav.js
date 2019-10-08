@@ -10,7 +10,7 @@ function UserNav() {
     e.preventDefault()
 
     Auth.signOut()
-      .then(logout(() => navigate('/signin')))
+      .then(logout(() => navigate('/')))
       .catch(err => console.log('error: ', err))
   }
 
