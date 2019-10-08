@@ -9,6 +9,17 @@
             "UnauthRoleName": "project4d-production-20191007131038-unauthRole",
             "StackName": "project4d-production-20191007131038",
             "StackId": "arn:aws:cloudformation:us-east-2:578765840413:stack/project4d-production-20191007131038/87f33d20-e93e-11e9-9b80-0a22cca2ed82"
+        },
+        "categories": {
+            "function": {
+                "project4dc464d889DefineAuthChallenge": {},
+                "project4dPreSignup": {
+                    "DOMAINWHITELIST": "strofina.com, beb.com, countryfinancial.com"
+                }
+            },
+            "auth": {
+                "project4d": {}
+            }
         }
     }
 }
