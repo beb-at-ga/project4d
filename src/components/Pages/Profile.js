@@ -7,7 +7,7 @@ import { AppContent } from '../Layout'
 const Profile = () => {
   const user = getCurrentUser()
   return (
-    <div className="container-login100">
+    <div className="container-login">
       <AppContent>
         <h1>Here's the Profile Page</h1>
         <p>Email: {user.email}</p>

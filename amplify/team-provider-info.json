@@ -13,21 +13,12 @@
         "categories": {
             "function": {
                 "project4dc464d889DefineAuthChallenge": {},
-                "project4dc464d889CreateAuthChallenge": {},
-                "project4dc464d889VerifyAuthChallengeResponse": {
-                    "RECAPTCHASECRET": "6Lf-ZbwUAAAAAFOhvrZgki2LK5tefZEqKgs729eV"
-                },
-                "project4dc464d889CustomMessage": {
-                    "REDIRECTURL": "https://scrub.strofina.com",
-                    "EMAILSUBJECT": "Please confirm your new account",
-                    "EMAILMESSAGE": "Welcome to Strofina's Single Lead Scrub service. Please confirm your email address by clicking the URL below to get started! If you did not regester a new account at scrub.strofina.com, please discard this message."
-                },
-                "project4dc464d889PreSignup": {
+                "project4dPreSignup": {
                     "DOMAINWHITELIST": "strofina.com, beb.com, countryfinancial.com"
                 }
             },
             "auth": {
-                "project4dc464d889": {}
+                "project4d": {}
             }
         }
     }

@@ -14,7 +14,7 @@ export function Layout({ children, isUserNav }) {
 
 export function AppContent({ children }) {
   return (
-    <div className="app-content-100">
+    <div className="app-content">
       <div className="container" style={{ marginTop: 40 }}>{children}</div>
     </div>
   )

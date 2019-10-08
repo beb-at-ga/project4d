@@ -147,8 +147,8 @@ class Reset extends React.Component {
     )
 
     // return (
-    //   <div className="container-login100">
-    //     <div className="wrap-login100 card">
+    //   <div className="container-login">
+    //     <div className="wrap-login card">
     //       {this.state.stage === 0 && (
     //         <form className="card-body">
     //           <h2>Reset your password</h2>

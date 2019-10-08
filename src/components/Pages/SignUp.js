@@ -126,7 +126,7 @@ class SignUp extends React.Component {
             autoComplete="off"
           />
           <div className="form-group">
-            <label htmlFor="exampleInputPhoneNum1">Phone Number</label>
+            <label htmlFor="enterPhoneNumber">Phone Number</label>
             <NumberFormat
               placeholder="+1 (###) ###-####"
               onChange={this.handleUpdate}
@@ -136,6 +136,7 @@ class SignUp extends React.Component {
               className="form-control"
               format="+1##########"
               mask="_"
+              id="enterPhoneNumber"
             />
           </div>
           <button

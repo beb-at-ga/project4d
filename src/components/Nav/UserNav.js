@@ -17,7 +17,7 @@ function UserNav() {
   return (
     <nav className="navbar navbar-expand">
       <Link className="text-center" to="/home">
-        <h1 className="navbar-brand mb-0 text-primary">Authenticaysh</h1>
+        <h1 className="navbar-brand mb-0 text-primary">Single Lead Scrub</h1>
       </Link>
       <div className="navbar-nav-scroll d-flex flex-grow-1" />
       <div className="navbar-nav-scroll">

@@ -2,8 +2,8 @@ import React from 'react'
 
 export function AuthForm({ children, title, error }) {
   return (
-    <div className="container-login100">
-      <div className="wrap-login100 card shadow p-3 mb-5 bg-white rounded mr-opacity">
+    <div className="container-login">
+      <div className="wrap-login card shadow p-3 mb-5 bg-white rounded mr-opacity">
         <form className="card-body auth-forms100">
           <h2>{title}</h2>
           {error && (

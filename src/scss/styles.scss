@@ -81,7 +81,7 @@ img:hover {
   animation: pulse 0.5s;
 }
 
-.container-login100 {
+.container-login {
   width: 100%;
   min-height: calc(100vh - 56px);
   display: -webkit-box;
@@ -99,21 +99,21 @@ img:hover {
   background-repeat: no-repeat;
 }
 
-.wrap-login100 {
+.wrap-login {
   width: 390px;
   background: #fff;
   border-radius: 10px;
   position: relative;
 }
 
-.app-content-100 {
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(103, 58, 183, 0.1),
-    rgba(103, 58, 183, 0.1) 10px,
-    rgba(225, 190, 231, 0.1) 10px,
-    rgba(225, 190, 231, 0.1) 20px
-  );
+.app-content {
+  // background: repeating-linear-gradient(
+  //   45deg,
+  //   rgba(103, 58, 183, 0.1),
+  //   rgba(103, 58, 183, 0.1) 10px,
+  //   rgba(225, 190, 231, 0.1) 10px,
+  //   rgba(225, 190, 231, 0.1) 20px
+  // );
   height: calc(100vh - 100px);
   width: 100vw;
 }

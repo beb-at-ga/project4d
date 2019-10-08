@@ -3,12 +3,12 @@
     "modules": [
         "email-filter-whitelist"
     ],
-    "parentResource": "project4dc464d889",
-    "functionName": "project4dc464d889PreSignup",
+    "parentResource": "project4d",
+    "functionName": "project4dPreSignup",
     "parentStack": "auth",
     "triggerEnvs": "[]",
     "triggerTemplate": "PreSignup.json.ejs",
-    "roleName": "project4dc464d889PreSignup",
+    "roleName": "project4dPreSignup",
     "skipEdit": true,
-    "resourceName": "project4dc464d889PreSignup"
+    "resourceName": "project4dPreSignup"
 }

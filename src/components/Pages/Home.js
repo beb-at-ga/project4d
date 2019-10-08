@@ -4,7 +4,7 @@ import { AppContent } from '../Layout'
 
 const Home = () => {
   return (
-    <div className="container-login100">
+    <div className="container-login">
       <AppContent>
         <h1>Here's the App Home Page</h1>
         <p>
