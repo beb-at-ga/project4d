@@ -1,0 +1,14 @@
+{
+    "trigger": true,
+    "modules": [
+        "captcha-verify"
+    ],
+    "parentResource": "project4dc464d889",
+    "functionName": "project4dc464d889VerifyAuthChallengeResponse",
+    "parentStack": "auth",
+    "triggerEnvs": "[]",
+    "triggerTemplate": "VerifyAuthChallengeResponse.json.ejs",
+    "roleName": "project4dc464d889VerifyAuthChallengeResponse",
+    "skipEdit": true,
+    "resourceName": "project4dc464d889VerifyAuthChallengeResponse"
+}

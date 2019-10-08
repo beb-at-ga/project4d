@@ -1,0 +1,14 @@
+{
+    "trigger": true,
+    "modules": [
+        "captcha-create-challenge"
+    ],
+    "parentResource": "project4dc464d889",
+    "functionName": "project4dc464d889CreateAuthChallenge",
+    "parentStack": "auth",
+    "triggerEnvs": "[]",
+    "triggerTemplate": "CreateAuthChallenge.json.ejs",
+    "roleName": "project4dc464d889CreateAuthChallenge",
+    "skipEdit": true,
+    "resourceName": "project4dc464d889CreateAuthChallenge"
+}
