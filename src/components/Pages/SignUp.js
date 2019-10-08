@@ -1,185 +1,228 @@
-import React from 'react'
-import { navigate } from '@reach/router'
-import { Link } from 'gatsby'
-import { Auth } from 'aws-amplify'
-import NumberFormat from 'react-number-format'
+import React, { useState } from 'react';
+import { navigate } from '@reach/router';
+import { Link } from 'gatsby';
+import { Auth } from 'aws-amplify';
+import NumberFormat from 'react-number-format';
 
-import { AuthForm, Email, Password, ConfirmationCode, GivenName, FamilyName } from '../Forms'
+import { AuthForm, Email, Password, ConfirmationCode } from '../Forms';
 
-const initialState = {
-  username: ``,
-  given_name: ``,
-  family_name: ``,
-  password: ``,
-  email: '',
-  phone_number: '',
-  auth_code: '',
-  stage: 0,
-  error: '',
-  loading: false,
-}
+const SignUp = props => {
+  const [username, setUsername] = useState(``);
+  const [given_name, setGiven_name] = useState(``);
+  const [family_name, setFamily_name] = useState(``);
+  const [password, setPassword] = useState(``);
+  const [email, setEmail] = useState(``);
+  const [phoneState, setPhoneState] = useState(``);
+  const [auth_code, setAuth_code] = useState(``);
+  const [stage, setStage] = useState(0);
+  const [error, setError] = useState(``);
+  const [loading, setLoading] = useState(false);
 
-class SignUp extends React.Component {
-  state = initialState
 
-  handleUpdate = event => {
+  const handleUpdate = event => {
+    console.log(event.target.value);
     if (event.target.name === 'email') {
-      this.setState({
-        [event.target.name]: event.target.value,
-        username: event.target.value,
-        error: '',
-      })
+      setEmail(event.target.value);
+      setUsername(event.target.value);
+      setError('');
     }
-    if (event.target.name === 'phone_number') {
-      this.setState({
-        [event.target.name]: event.target.value.replace(/\D/g, ''),
-        error: '',
-      })
-    }
-    this.setState({
-      [event.target.name]: event.target.value,
-      error: '',
-    })
-  }
 
-  signUp = async e => {
-    e.preventDefault()
-    const { username, password, email, phone_number, given_name, family_name } = this.state
-    this.setState({ loading: true })
+    if (event.target.name === 'phone_number') {
+      setPhoneState(event.target.value);
+      setError('');
+    }
+
+    if (event.target.name === 'password') {
+      setPassword(event.target.value);
+      setError('');
+    }
+
+    if (event.target.name === 'given_name') {
+      setGiven_name(event.target.value);
+      setError('');
+    }
+
+    if (event.target.name === 'family_name') {
+      setFamily_name(event.target.value);
+      setError('');
+    }
+
+    if (event.target.name === 'auth_code') {
+      setAuth_code(event.target.value);
+      setError('');
+    }
+
+  };
+
+  const signUp = async e => {
+    e.preventDefault();
+    setLoading(true);
+
+    let phone_number = `+${phoneState.replace(/\D/g, '')}`;
+
     try {
       await Auth.signUp({
         username,
         password,
         attributes: { email, phone_number, given_name, family_name },
-      })
-      this.setState({ stage: 1, loading: false })
+      });
+      setStage(1);
+      setLoading(false);
     } catch (err) {
-      this.setState({ error: err, loading: false })
-      console.log('error signing up...', err)
+      setLoading(false);
+      setError(err);
+      console.log('error signing up...', err);
     }
-  }
+  };
 
-  resendCode = async e => {
-    e.preventDefault()
-    const { email } = this.state
-    this.setState({ loading: true })
+  const resendCode = async e => {
+    e.preventDefault();
+    setLoading(true);
+
     try {
-      await Auth.resendSignUp(email)
-      this.setState({ stage: 1, loading: false })
-    } catch (err) {
-      this.setState({ error: err, loading: false })
-      console.log('error resending code...', err)
-    }
-  }
+      await Auth.resendSignUp(email);
 
-  verify = async e => {
-    e.preventDefault()
-    const { email, auth_code } = this.state
-    this.setState({ loading: true })
+      setStage(1);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      setError(err);
+      console.log('error signing up...', err);
+    }
+  };
+
+  const verify = async e => {
+    e.preventDefault();
+    setLoading(true);
     try {
-      await Auth.verifyCurrentUserAttributeSubmit(email, auth_code)
-      this.setState({ loading: false })
-      navigate('/signin')
+      await Auth.verifyCurrentUserAttributeSubmit(email, auth_code);
+      setLoading(false);
+      navigate('/signin');
     } catch (err) {
-      this.setState({ error: err, loading: false })
-      console.log('error signing up...', err)
+      setLoading(false);
+      setError(err);
+      console.log('error signing up...', err);
     }
-  }
+  };
 
-  confirmSignUp = async e => {
-    e.preventDefault()
-    this.setState({ loading: true })
-    const { email, auth_code } = this.state
+  const confirmSignUp = async e => {
+    e.preventDefault();
+    setLoading(true);
     try {
-      this.setState({ loading: true })
-      await Auth.confirmSignUp(email, auth_code)
-      this.setState({ loading: false })
-      navigate('/signin')
+      setLoading(true);
+      await Auth.confirmSignUp(email, auth_code);
+      setLoading(false);
+      navigate('/signin');
     } catch (err) {
-      this.setState({ error: err, loading: false })
-      console.log('error confirming signing up...', err)
+      setLoading(false);
+      setError(err);
+      console.log('error signing up...', err);
     }
-  }
+  };
 
-  render() {
-    if (this.state.stage === 0) {
-      return (
-        <AuthForm title="Create a new account" error={this.state.error}>
-          <GivenName
-            handleUpdate={this.handleUpdate}
-            email={this.state.given_name}
+  if (stage === 0) {
+    return (
+      <AuthForm title="Create a new account" error={error}>
+        <div className="form-group">
+          <label htmlFor="enterGivenName">First Name</label>
+          <input
+            onChange={handleUpdate}
+            name="given_name"
+            type="text"
+            value={given_name}
+            className="form-control"
             autoComplete="off"
+            id="enterGivenName"
+            aria-describedby="given_nameHelp"
+            placeholder="Enter First Name"
           />
-          <FamilyName
-            handleUpdate={this.handleUpdate}
-            email={this.state.family_name}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="enterFamilyName">Last Name</label>
+          <input
+            onChange={handleUpdate}
+            name="family_name"
+            type="text"
+            value={family_name}
+            className="form-control"
             autoComplete="off"
+            id="enterFamilyName"
+            aria-describedby="family_nameHelp"
+            placeholder="Enter Last Name"
           />
-          <Email
-            handleUpdate={this.handleUpdate}
-            email={this.state.email}
-            autoComplete="off"
+        </div>
+
+        <Email
+          handleUpdate={handleUpdate}
+          email={email}
+          autoComplete="off"
+        />
+
+        <Password
+          handleUpdate={handleUpdate}
+          password={password}
+          autoComplete="off"
+        />
+
+        <div className="form-group">
+          <label htmlFor="enterPhoneNumber">Phone Number</label>
+          <NumberFormat
+            placeholder="+1 (###) ###-####"
+            onChange={handleUpdate}
+            name="phone_number"
+            value={phoneState}
+            type="tel"
+            className="form-control"
+            format="+1 (###) ###-####"
+            mask="_"
+            id="enterPhoneNumber"
           />
-          <Password
-            handleUpdate={this.handleUpdate}
-            password={this.state.password}
-            autoComplete="off"
-          />
-          <div className="form-group">
-            <label htmlFor="enterPhoneNumber">Phone Number</label>
-            <NumberFormat
-              placeholder="+1 (###) ###-####"
-              onChange={this.handleUpdate}
-              name="phone_number"
-              value={this.state.phone_number}
-              type="tel"
-              className="form-control"
-              format="+1##########"
-              mask="_"
-              id="enterPhoneNumber"
+        </div>
+
+        <button
+          onClick={e => signUp(e)}
+          type="submit"
+          className="btn btn-primary btn-block"
+          disabled={loading}
+        >
+          {loading ? null : 'Create Account'}
+          {loading && (
+            <span
+              className="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
             />
-          </div>
-          <button
-            onClick={e => this.signUp(e)}
-            type="submit"
-            className="btn btn-primary btn-block"
-            disabled={this.state.loading}
-          >
-            {this.state.loading ? null : 'Create Account'}
-            {this.state.loading && (
-              <span
-                className="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              />
-            )}
-          </button>
-          <p style={{ marginTop: 40 }} className="text-center">
-            Have an account? <Link to="/signin">Sign in</Link>
-          </p>
-        </AuthForm>
-      )
-    }
+          )}
+        </button>
+        <p style={{ marginTop: 40 }} className="text-center">
+          Have an account? <Link to="/signin">Sign in</Link>
+        </p>
+      </AuthForm>
+    );
+  } else {
     return (
       <AuthForm>
         <Email
-          handleUpdate={this.handleUpdate}
-          email={this.state.email}
+          handleUpdate={handleUpdate}
+          email={email}
           autoComplete="off"
         />
+
         <ConfirmationCode
-          handleUpdate={this.handleUpdate}
-          auth_code={this.state.auth_code}
+          handleUpdate={handleUpdate}
+          auth_code={auth_code}
           autoComplete="off"
         />
+
         <button
-          onClick={e => this.confirmSignUp(e)}
+          onClick={e => confirmSignUp(e)}
           type="submit"
           className="btn btn-primary btn-block"
-          disabled={this.state.loading}
+          disabled={loading}
         >
-          {this.state.loading ? null : 'Confirm'}
-          {this.state.loading && (
+          {loading ? null : 'Confirm'}
+          {loading && (
             <span
               className="spinner-border spinner-border-sm"
               role="status"
@@ -205,15 +248,15 @@ class SignUp extends React.Component {
           </p>
           <button
             className="btn btn-link"
-            onClick={e => this.resendCode(e)}
-            disabled={this.state.loading}
+            onClick={e => resendCode(e)}
+            disabled={loading}
           >
             Resend Code
           </button>
         </div>
       </AuthForm>
-    )
+    );
   }
-}
+};
 
-export default SignUp
+export default SignUp;

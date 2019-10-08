@@ -1,92 +1,88 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import { navigate } from '@reach/router'
-import { Auth } from 'aws-amplify'
+import React, { useState } from 'react';
+import { Link } from 'gatsby';
+import { navigate } from '@reach/router';
+import { Auth } from 'aws-amplify';
 
-import { AppUser } from '../Auth'
-import { AuthForm, Email, Password } from '../Forms'
+import { AppUser } from '../Auth';
+import { AuthForm, Email, Password } from '../Forms';
 
-class SignIn extends React.Component {
-  state = {
-    username: ``,
-    email: ``,
-    password: ``,
-    error: ``,
-    loading: false,
-  }
+const SignIn = props => {
+  const [username, setUsername] = useState(``);
+  const [email, setEmail] = useState(``);
+  const [password, setPassword] = useState(``);
+  const [error, setError] = useState(``);
+  const [loading, setLoading] = useState(false);
 
-  handleUpdate = event => {
+  const handleUpdate = event => {
+    console.log(`${event.target.name}: ${event.target.value}`);
+
     if (event.target.name === 'email') {
-      this.setState({
-        [event.target.name]: event.target.value,
-        username: event.target.value,
-        error: '',
-      })
+      setEmail(event.target.value);
+      setUsername(event.target.value);
+      setError('');
     }
-    this.setState({
-      [event.target.name]: event.target.value,
-      error: '',
-    })
-  }
 
-  login = async e => {
-    const { setUser } = AppUser
-    e.preventDefault()
-    const { username, password } = this.state
+    if (event.target.name === 'password') {
+      setPassword(event.target.value);
+      setError('');
+    }
+  };
+
+  const login = async e => {
+    const { setUser } = AppUser;
+    e.preventDefault();
+    // const { username, password } = this.state
     try {
-      this.setState({ loading: true })
-      await Auth.signIn(username, password)
-      const user = await Auth.currentAuthenticatedUser()
+      setLoading(true);
+
+      await Auth.signIn(username, password);
+      const user = await Auth.currentAuthenticatedUser();
       const userInfo = {
         ...user.attributes,
         username: user.username,
-      }
-      setUser(userInfo)
-      this.setState({ loading: false })
-      navigate('/home')
+      };
+      setUser(userInfo);
+      setLoading(false);
+      navigate('/home');
     } catch (err) {
-      this.setState({ error: err, loading: false })
-      console.log('error...: ', err)
+      setLoading(false);
+      setError(err);
+      console.log('error...: ', err);
     }
-  }
+  };
 
-  render() {
-    return (
-      <AuthForm title="Sign in to your account" error={this.state.error}>
-        <Email
-          handleUpdate={this.handleUpdate}
-          email={this.state.email}
-          autoComplete="on"
-        />
-        <Password
-          handleUpdate={this.handleUpdate}
-          password={this.state.password}
-          autoComplete="on"
-        />
-        <p className="text-center">
-          Forgot your password? <Link to="/reset">Reset password</Link>
-        </p>
-        <button
-          onClick={e => this.login(e)}
-          type="submit"
-          className="btn btn-primary btn-block"
-          disabled={this.state.loading}
-        >
-          {this.state.loading ? null : 'Sign In'}
-          {this.state.loading && (
-            <span
-              className="spinner-border spinner-border-sm"
-              role="status"
-              aria-hidden="true"
-            />
-          )}
-        </button>
-        <p style={{ marginTop: 40 }} className="text-center">
-          No account? <Link to="/signup">Create account</Link>
-        </p>
-      </AuthForm>
-    )
-  }
-}
+  return (
+    <AuthForm title="Sign in to your account" error={error}>
+      <Email handleUpdate={handleUpdate} email={email} autoComplete="on" />
+      <Password
+        handleUpdate={handleUpdate}
+        password={password}
+        autoComplete="on"
+      />
 
-export default SignIn
+      <p className="text-center">
+        Forgot your password? <Link to="/reset">Reset password</Link>
+      </p>
+      <button
+        onClick={e => login(e)}
+        type="submit"
+        className="btn btn-primary btn-block"
+        disabled={loading}
+      >
+        {loading ? null : 'Sign In'}
+        {loading && (
+          <span
+            className="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          />
+        )}
+      </button>
+      <p style={{ marginTop: 40 }} className="text-center">
+        No account? <Link to="/signup">Create account</Link>
+      </p>
+    </AuthForm>
+  );
+};
+
+export default SignIn;

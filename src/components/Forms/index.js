@@ -1,3 +1,3 @@
-import { AuthForm, Email, Password, ConfirmationCode, GivenName, FamilyName } from './AuthForms'
+import { AuthForm, Email, Password, ConfirmationCode } from './AuthForms'
 
-export { AuthForm, Email, Password, ConfirmationCode, GivenName, FamilyName }
+export { AuthForm, Email, Password, ConfirmationCode }

@@ -6,13 +6,9 @@ const Home = () => {
   return (
     <div className="container-login">
       <AppContent>
-        <h1>Here's the App Home Page</h1>
+        <h1>This will be tabbed control panel.</h1>
         <p>
-          Since you are now logged in, view your profile: <Link to="/profile">View profile</Link>
-        </p>
-        <p>
-          This starter was built using AWS Amplify. Try it out:{' '}
-          <a href="https://console.amplify.aws">AWS Amplify</a>
+          view  profile: <Link to="/profile">View profile</Link>
         </p>
       </AppContent>
     </div>

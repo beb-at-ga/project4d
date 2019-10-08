@@ -6,7 +6,7 @@ import {
   IndexPage,
   Reset,
   SignIn,
-  SignUp,
+  SignUp
 } from '../components/Pages'
 import PrivateRoute from '../components/Routes/PrivateRoute'
 import PublicRoute from '../components/Routes/PublicRoute'
@@ -22,6 +22,7 @@ const App = () => {
       <PublicRoute path="/signin" component={SignIn} />
       <PublicRoute path="/signup" component={SignUp} />
       <PublicRoute path="/reset" component={Reset} />
+      {/* <PublicRoute path="/testmodal" component={TestModal} /> */}
       <PublicRoute path="/" component={IndexPage} />
     </Router>
   )
