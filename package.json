@@ -25,13 +25,11 @@
     "gatsby-plugin-sharp": "^2.2.9",
     "gatsby-source-filesystem": "^2.1.29",
     "gatsby-transformer-sharp": "^2.2.5",
+    "graphql": "^14.5.8",
+    "jquery": "^3.4.1",
     "react": "^16.10.2",
-    "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.10.2",
-    "react-helmet": "^5.2.1",
-    "react-number-format": "^4.0.8",
-    "snappy": "^6.2.3",
-    "zmq": "^2.15.3"
+    "react-number-format": "^4.0.8"
   },
   "devDependencies": {
     "@hot-loader/react-dom": "^16.8.6",
