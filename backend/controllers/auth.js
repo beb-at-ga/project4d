@@ -3,6 +3,7 @@ const router = require("express").Router();
 const db = require("../models");
 const jwt = require("jsonwebtoken");
 
+
 // POST /auth/login (find and validate user and send password)
 router.post("/login", (req, res) => {
   // Find the user by their email address
@@ -36,6 +37,7 @@ router.post("/login", (req, res) => {
       });
     });
 });
+
 
 router.post("/signup", (req, res) => {
   // res.send(req.body);
@@ -76,6 +78,7 @@ router.post("/signup", (req, res) => {
     });
 });
 
+
 router.get("/current/user", (req, res) => {
   if (!req.user) {
     res.status(500).send({ message: 'Something went wrong. Please try again.'})
@@ -88,5 +91,6 @@ router.get("/current/user", (req, res) => {
     res.send({user: req.user});
   }
 });
+
 
 module.exports = router;

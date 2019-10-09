@@ -17,6 +17,8 @@
     "express-jwt": "^5.3.1",
     "express-session": "^1.16.2",
     "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "pg": "^7.12.1",
     "rowdy-logger": "^1.0.2",
     "sequelize": "^5.19.5"
