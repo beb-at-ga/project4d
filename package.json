@@ -10,8 +10,10 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \"",
+    "deploy": "gatsby-plugin-s3 deploy"
   },
+  
   "dependencies": {
     "@aws-amplify/cli": "^3.11.0",
     "aws-amplify": "^1.1.40",
@@ -21,6 +23,7 @@
     "gatsby": "^2.15.29",
     "gatsby-plugin-create-client-paths": "^2.1.3",
     "gatsby-plugin-react-svg": "^2.1.1",
+    "gatsby-plugin-s3": "^0.3.2",
     "gatsby-plugin-sass": "^2.1.4",
     "gatsby-plugin-sharp": "^2.2.9",
     "gatsby-source-filesystem": "^2.1.29",
