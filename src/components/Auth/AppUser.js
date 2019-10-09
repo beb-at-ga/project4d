@@ -1,9 +1,11 @@
+
 const isBrowser = typeof window !== `undefined`
 
 export const setUser = user =>
   (window.localStorage.gatsbyUser = JSON.stringify(user))
 
 const getUser = () => {
+
   if (window.localStorage.gatsbyUser) {
     let user = JSON.parse(window.localStorage.gatsbyUser)
     return user ? user : {}

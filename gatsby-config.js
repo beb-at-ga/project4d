@@ -19,12 +19,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-s3`,
-      options: {
-        bucketName: 'project4d',
-      },
-    },
-    {
       resolve: 'gatsby-plugin-react-svg',
       options: {
         rule: {

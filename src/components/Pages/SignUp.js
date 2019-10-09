@@ -91,19 +91,19 @@ const SignUp = props => {
     }
   };
 
-  const verify = async e => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await Auth.verifyCurrentUserAttributeSubmit(email, auth_code);
-      setLoading(false);
-      navigate('/signin');
-    } catch (err) {
-      setLoading(false);
-      setError(err);
-      console.log('error signing up...', err);
-    }
-  };
+  // const verify = async e => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   try {
+  //     await Auth.verifyCurrentUserAttributeSubmit(email, auth_code);
+  //     setLoading(false);
+  //     navigate('/signin');
+  //   } catch (err) {
+  //     setLoading(false);
+  //     setError(err);
+  //     console.log('error signing up...', err);
+  //   }
+  // };
 
   const confirmSignUp = async e => {
     e.preventDefault();
