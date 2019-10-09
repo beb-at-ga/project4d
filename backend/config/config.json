@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "571_237_684_373",
+    "database": "project4d",
+    "host": "project4d.cpjptdlfquxz.us-west-2.rds.amazonaws.com",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+}

@@ -52,4 +52,3 @@
 
 sequelize model:create --name widget --attributes "description:string, quantity:integer"
 
-
