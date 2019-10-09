@@ -16,6 +16,8 @@ const Profile = () => {
 
   const getToken = async () => {
     setJwt((await Auth.currentSession()).getAccessToken().getJwtToken());
+    // setJwt((await Auth.currentSession()).getIdToken());
+
   };
 
   return (
