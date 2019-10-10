@@ -48,6 +48,18 @@ const Signup = props => {
         <span className="red">{message}</span>
         <form onSubmit={handleSubmit}>
           <input
+            id="agent_id"
+            type="number"
+            name="agent_id"
+            placeholder="Agent Number"
+          ></input>
+          <input
+            id="agency_id"
+            type="number"
+            name="agency_id"
+            placeholder="Agency ID"
+          ></input>
+          <input
             id="firstname"
             type="text"
             name="firstname"
@@ -70,19 +82,6 @@ const Signup = props => {
             type="text"
             name="phonenumber"
             placeholder="Phone Number"
-          ></input>
-
-          <input
-            id="agency_id"
-            type="number"
-            name="agency_id"
-            placeholder="Agency ID"
-          ></input>
-          <input
-            id="agent_id"
-            type="number"
-            name="agent_id"
-            placeholder="Agent ID"
           ></input>
           <input
             id="password"

@@ -11,6 +11,7 @@ import Profile from './components/Pages/Profile';
 import About from './components/Pages/About';
 import Privacy from './components/Pages/Privacy';
 import Help from './components/Pages/Help';
+import Admin from './components/Pages/Admin';
 
 const Routes = props => {
   return (
@@ -41,6 +42,9 @@ const Routes = props => {
       <Route path="/help" render={() => <Help user={props.user} />} />
       <Route path="/about" render={() => <About user={props.user} />} />
       <Route path="/privacy" render={() => <Privacy user={props.user} />} />
+
+      <Route path="/admin" render={() => <Admin user={props.user} />} />
+
     </div>
   );
 };

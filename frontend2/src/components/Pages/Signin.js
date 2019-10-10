@@ -17,7 +17,7 @@ const Signup = props => {
     body.password = e.target.password.value;
 
     // console.log(body, BASE_URL);
-    console.log(`Sumbitting: ${body}`);
+    // console.log(`Sumbitting: ${body}`);
     axios
       .post(`${BASE_URL}/auth/login`, body)
       .then(response => {

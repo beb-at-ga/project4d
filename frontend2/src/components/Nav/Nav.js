@@ -3,9 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // import { Redirect } from 'react-router-dom';
 
-
 const Nav = props => {
-  
   const handleLogout = e => {
     e.preventDefault();
     //remove jwt from local storage or cookies
@@ -15,18 +13,36 @@ const Nav = props => {
   let links = '';
 
   if (props.user.id) {
-    links = (
-      <>
-        <li>
-          <Link to="/profile">Profile</Link>
-        </li>
-        <li>
-          <Link to="/" onClick={handleLogout}>
-            Logout
-          </Link>
-        </li>
-      </>
-    );
+    if (props.user.isAdmin === true) {
+      links = (
+        <>
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+          <li>
+            <Link to="/admin">Admin</Link>
+          </li>
+          <li>
+            <Link to="/" onClick={handleLogout}>
+              Logout
+            </Link>
+          </li>
+        </>
+      );
+    } else {
+      links = (
+        <>
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+          <li>
+            <Link to="/" onClick={handleLogout}>
+              Logout
+            </Link>
+          </li>
+        </>
+      );
+    }
   } else {
     links = (
       <>
