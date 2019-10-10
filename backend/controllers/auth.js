@@ -57,6 +57,9 @@ router.post('/signup', (req, res) => {
             lastname: req.body.lastname,
             email: req.body.email,
             password: req.body.password,
+            agency_id: req.body.agency_id,
+            agent_id: req.body.agent_id,
+            phonenumber: req.body.phonenumber
           })
           .then(newUser => {
             // assing user a JWT
