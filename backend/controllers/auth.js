@@ -84,17 +84,17 @@ router.post('/signup', (req, res) => {
     });
 });
 
-// router.get("/current/user", (req, res) => {
-//   if (!req.user) {
-//     res.status(500).send({ message: 'Something went wrong. Please try again.'})
-//   } else {
-//     // This is the user data from the time the token was issued, therfore if the user is updated,
-//     // those values will not be reflected here...
+router.get("/current/user", (req, res) => {
+  if (!req.user) {
+    res.status(500).send({ message: 'Something went wrong. Please try again.'})
+  } else {
+    // This is the user data from the time the token was issued, therfore if the user is updated,
+    // those values will not be reflected here...
 
-//     // to avoid this problem, reissue token when you update their data.
-//     // login, update,
-//     res.send({user: req.user});
-//   }
-// });
+    // to avoid this problem, reissue token when you update their data.
+    // login, update,
+    res.send({user: req.user});
+  }
+});
 
 module.exports = router;
