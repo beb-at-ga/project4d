@@ -3,6 +3,24 @@ const router = require('express').Router();
 const db = require('../models');
 const jwt = require('jsonwebtoken');
 
+
+const logEvent = (type, userid, data) => {
+  db.event
+    .create({
+      type: type,
+      userId: userid,
+      data: data,
+    })
+    .then(event => {
+      console.log('log event created');
+    })
+    .catch(err => {
+      console.log(`failed to write log event to database`);
+      console.log(err);
+    });
+}
+
+
 // POST /auth/login (find and validate user and send password)
 router.post('/login', (req, res) => {
   // Find the user by their email address
@@ -12,22 +30,29 @@ router.post('/login', (req, res) => {
     })
     .then(user => {
       if (!user || !user.password) {
+        // user not found.
+        logEvent('auth', 0, `login attmempted for ${req.body.email}`);
+
         return res.status(406).send({
           message: 'Invalid Credentials',
         });
       }
 
       if (!user.passwordCheck(req.body.password)) {
-        // password did not match
+        // user found, password did not match
+        logEvent('auth', user.id, `bad passweord`);
+
         return res.status(406).send({
           message: 'Invalid credentials',
         });
       }
 
+      // user found and password successful
       let token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
         expiresIn: 60 * 60,
       });
 
+      logEvent('auth', user.id, `successful login`);
       res.send({ token });
     })
     .catch(err => {
@@ -47,6 +72,7 @@ router.post('/signup', (req, res) => {
     .then(user => {
       // if user exists, do not let them create a duplicate account
       if (user) {
+        logEvent('registration', 0, `already registered: ${req.body.email}`);
         return res.status(409).send({
           message: 'Email address already in use.',
         });
@@ -59,14 +85,16 @@ router.post('/signup', (req, res) => {
             password: req.body.password,
             agency_id: req.body.agency_id,
             agent_id: req.body.agent_id,
-            phonenumber: req.body.phonenumber
+            phonenumber: req.body.phonenumber,
           })
           .then(newUser => {
             // assing user a JWT
+            logEvent('registration', newUser.id, `registration successful: ${req.body.email}`);
             let token = jwt.sign(newUser.toJSON(), process.env.JWT_SECRET, {
               expiresIn: 60 * 60, // expiration in seconds.
             });
 
+            logEvent('auth', newUser.id, `successful login`);
             res.send({
               token,
             });
@@ -87,16 +115,18 @@ router.post('/signup', (req, res) => {
     });
 });
 
-router.get("/current/user", (req, res) => {
+router.get('/current/user', (req, res) => {
   if (!req.user) {
-    res.status(500).send({ message: 'Something went wrong. Please try again.'})
+    res
+      .status(500)
+      .send({ message: 'Something went wrong. Please try again.' });
   } else {
     // This is the user data from the time the token was issued, therfore if the user is updated,
     // those values will not be reflected here...
 
     // to avoid this problem, reissue token when you update their data.
     // login, update,
-    res.send({user: req.user});
+    res.send({ user: req.user });
   }
 });
 
