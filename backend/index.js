@@ -27,18 +27,18 @@ app.get("/", (req, res) => {
   res.send("hello");
 });
 
-// app.use(
-//   "/auth",
-//   expressJwt({
-//     secret: process.env.JWT_SECRET
-//   }).unless({
-//     path: [
-//       { url: "/auth/login", methods: ["POST"] },
-//       { url: "/auth/signup", methods: ["POST"] }
-//     ]
-//   }),
-//   require("./controllers/auth")
-// );
+app.use(
+  "/auth",
+  expressJwt({
+    secret: process.env.JWT_SECRET
+  }).unless({
+    path: [
+      { url: "/auth/login", methods: ["POST"] },
+      { url: "/auth/signup", methods: ["POST"] }
+    ]
+  }),
+  require("./controllers/auth")
+);
 
 app.get("*", (req, res) => {
   res.status(404).send({
