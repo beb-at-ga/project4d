@@ -2,7 +2,3 @@
 # yarn lockfile v1
 
 
-lambda-mailer@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/lambda-mailer/-/lambda-mailer-0.2.0.tgz#61a134d9dc60c6e71ac37f0525d6ab3b7b188e85"
-  integrity sha512-Fqd/1mCeVXFa+RgR+/sl05cXCg7u7qTVhc5qUwrjA5ONR/DFuk7K4MwSuCmbHtDv2vwXrF3Okz1G/qgTX9OoIg==
