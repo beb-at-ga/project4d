@@ -43,6 +43,7 @@ module.exports = (options) => {
   }
 
   const generateEmailParamsFromUriEncoded  = (body) => {
+
     const { email, name, subject, content } = getParamsFromUrl(body)
     if (!(email && name && content && subject)) {
       throw new Error('Missing parameters! Make sure to add parameters \'email\', \'name\', \'subject\', \'content\'.')
