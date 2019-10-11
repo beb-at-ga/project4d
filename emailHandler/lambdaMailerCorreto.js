@@ -74,10 +74,15 @@ module.exports = (options) => {
     try {
       const redirectUrl = event.queryStringParameters ? event.queryStringParameters.redirectUrl : event.headers.Referer
       const emailParams = generateEmailParamsFromUriEncoded(event.body)
+   
       await ses.sendEmail(emailParams).promise()
+   
       return generateRedirect(302, redirectUrl)
+   
     } catch (err) {
+   
       return generateError(500, err)
+   
     }
   }
 
@@ -85,4 +90,5 @@ module.exports = (options) => {
     sendFormEncoded
   }
 }
+
 
