@@ -3,7 +3,6 @@ const router = require('express').Router();
 const db = require('../models');
 const jwt = require('jsonwebtoken');
 
-
 // const logEvent = (type, userid, data) => {
 //   db.event
 //     .create({

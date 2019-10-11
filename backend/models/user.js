@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       agency_id: DataTypes.INTEGER,
       agent_id: DataTypes.INTEGER,
       phonenumber: DataTypes.STRING,
-      isAdmin: DataTypes.BOOLEAN
+      isAdmin: DataTypes.BOOLEAN,
     },
     {
       hooks: {
@@ -55,26 +55,20 @@ module.exports = (sequelize, DataTypes) => {
   );
   user.associate = function(models) {
     // associations can be defined here
-    models.user.hasMany(models.event)
+    models.user.hasMany(models.event);
   };
-
 
   user.prototype.passwordCheck = function(typedPwd) {
     return bcrypt.compareSync(typedPwd, this.password);
   };
 
-  console.log(user.password)
-  delete user.password;
-  console.log(user.password)
+
+  user.prototype.toJSON = function () {
+    var values = Object.assign({}, this.get());
+  
+    delete values.password;
+    return values;
+  }
+
   return user;
-
 };
-
-
-// userSchema.set('toJSON', {
-//   transform: (doc, user) => {
-
-//       delete user.password
-//       return user
-//   }
-// })

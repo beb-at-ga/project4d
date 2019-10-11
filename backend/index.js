@@ -36,11 +36,13 @@ app.use("/auth", expressJwt({ secret: process.env.JWT_SECRET }).unless({
   require("./controllers/auth")
 );
 
-
 app.use("/events", expressJwt({ secret: process.env.JWT_SECRET }),
   require("./controllers/events")
 );
 
+app.use("/user", expressJwt({ secret: process.env.JWT_SECRET }),
+  require("./controllers/user")
+);
 
 app.get("*", (req, res) => {
   res.status(404).send({

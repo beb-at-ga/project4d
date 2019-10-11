@@ -3,7 +3,6 @@ const router = require('express').Router();
 const db = require('../models');
 const jwt = require('jsonwebtoken');
 
-
 const logEvent = (type, userid, data) => {
   db.event
     .create({
@@ -18,8 +17,7 @@ const logEvent = (type, userid, data) => {
       console.log(`failed to write log event to database`);
       console.log(err);
     });
-}
-
+};
 
 // POST /auth/login (find and validate user and send password)
 router.post('/login', (req, res) => {
@@ -89,7 +87,11 @@ router.post('/signup', (req, res) => {
           })
           .then(newUser => {
             // assing user a JWT
-            logEvent('registration', newUser.id, `registration successful: ${req.body.email}`);
+            logEvent(
+              'registration',
+              newUser.id,
+              `registration successful: ${req.body.email}`
+            );
             let token = jwt.sign(newUser.toJSON(), process.env.JWT_SECRET, {
               expiresIn: 60 * 60, // expiration in seconds.
             });
@@ -121,11 +123,7 @@ router.get('/current/user', (req, res) => {
       .status(500)
       .send({ message: 'Something went wrong. Please try again.' });
   } else {
-    // This is the user data from the time the token was issued, therfore if the user is updated,
-    // those values will not be reflected here...
 
-    // to avoid this problem, reissue token when you update their data.
-    // login, update,
     res.send({ user: req.user });
   }
 });

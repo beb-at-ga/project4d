@@ -23,7 +23,7 @@ const Signup = props => {
     body.phonenumber = e.target.phonenumber.value;
 
     // console.log(body, BASE_URL);
-    console.log(`Sumbitting: ${body}`);
+    // console.log(`Sumbitting: ${body}`);
     axios
       .post(`${BASE_URL}/auth/signup`, body)
       .then(response => {

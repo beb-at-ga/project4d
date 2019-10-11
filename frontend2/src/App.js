@@ -22,7 +22,7 @@ const App = () => {
     let token = localStorage.getItem('authToken');
 
     if (token) {
-      // console.log(`token found: ${token}`);
+      console.log(`Found Token. Getting new one...`);
       axios
         .get(`${BASE_URL}/auth/current/user`, {
           headers: {
