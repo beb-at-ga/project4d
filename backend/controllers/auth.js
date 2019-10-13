@@ -117,15 +117,15 @@ router.post('/signup', (req, res) => {
     });
 });
 
-router.get('/current/user', (req, res) => {
-  if (!req.user) {
-    res
-      .status(500)
-      .send({ message: 'Something went wrong. Please try again.' });
-  } else {
+// router.get('/current/user', (req, res) => {
+//   if (!req.user) {
+//     res
+//       .status(500)
+//       .send({ message: 'Something went wrong. Please try again.' });
+//   } else {
 
-    res.send({ user: req.user });
-  }
-});
+//     res.send({ user: req.user });
+//   }
+// });
 
 module.exports = router;

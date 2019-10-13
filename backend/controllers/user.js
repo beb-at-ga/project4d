@@ -26,25 +26,26 @@ router.post('/current', (req, res) => {
     })
     .then(user => {
       if (db.user) {
-        db.user.update(req.body, {
-          where: {
-            id: req.body.id
-          }
-        })
-        .then(() => {
-          let token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
-            expiresIn: 60 * 60, // expiration in seconds.
+        db.user
+          .update(req.body, {
+            where: {
+              id: req.body.id,
+            },
+          })
+          .then(() => {
+            let token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
+              expiresIn: 60 * 60, // expiration in seconds.
+            });
+            res.send({
+              token,
+            });
+          })
+          .catch(err => {
+            console.log(err);
+            res.status(503).send({
+              message: 'Error writing to database. Please try again.',
+            });
           });
-          res.send({
-            token,
-          }); 
-        })
-        .catch(err => {
-          console.log(err);
-          res.status(503).send({
-            message: 'Error writing to database. Please try again.',
-          });
-        })
       } else {
         console.log(
           'since this is a protect route, this should never happen...'
@@ -65,7 +66,17 @@ router.get('/current', (req, res) => {
       .status(500)
       .send({ message: 'Something went wrong. Please try again.' });
   } else {
-    res.send({ user: req.user });
+    // console.log(req.user);
+    db.user
+      .findOne({
+        where: { email: req.user.email },
+      })
+      .then(user => {
+        res.send({user: user})
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 });
 

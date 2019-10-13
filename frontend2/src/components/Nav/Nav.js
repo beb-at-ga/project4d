@@ -10,61 +10,94 @@ const Nav = props => {
     localStorage.removeItem('authToken');
     props.updateUser();
   };
-  let links = '';
 
+  let links = '';
   if (props.user.id) {
     if (props.user.isAdmin === true) {
       links = (
         <>
-          <li>
-            <Link to="/profile">Profile</Link>
-          </li>
-          <li>
-            <Link to="/admin">Admin</Link>
-          </li>
-          <li>
-            <Link to="/" onClick={handleLogout}>
-              Logout
-            </Link>
-          </li>
+          <Link class="nav-item nav-link" to="/profile">
+            Profile
+          </Link>
+          <Link class="nav-item nav-link" to="/admin">
+            Admin
+          </Link>
+          <Link class="nav-item nav-link" to="/" onClick={handleLogout}>
+            Logout
+          </Link>
         </>
       );
     } else {
       links = (
         <>
-          <li>
-            <Link to="/profile">Profile</Link>
-          </li>
-          <li>
-            <Link to="/" onClick={handleLogout}>
-              Logout
-            </Link>
-          </li>
+          <Link class="nav-item nav-link" to="/profile">
+            Profile
+          </Link>
+          <Link class="nav-item nav-link" to="/" onClick={handleLogout}>
+            Logout
+          </Link>
         </>
       );
     }
   } else {
     links = (
       <>
-        <li>
-          <Link to="/signup">Sign Up</Link>
-        </li>
-        <li>
-          <Link to="/signin">Sign In</Link>
-        </li>
+        <Link class="nav-item nav-link" to="/signup">
+          Sign Up
+        </Link>
+        <Link class="nav-item nav-link" to="/signin">
+          Sign In
+        </Link>
+      </>
+    );
+  }
+
+  let brand;
+  if (props.user.id) {
+    brand = (
+      <>
+        <a class="navbar-brand" href="#">
+          Strofina Single Lead Scrub
+        </a>
+      </>
+    );
+  } else {
+    brand = (
+      <>
+        <a class="navbar-brand" href="#">
+          Strofina Single Lead Scrub
+        </a>
       </>
     );
   }
 
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        {links}
-      </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      {brand}
+      <button class="navbar-toggler" type="button" data-toggle="collapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <Link class="nav-item nav-link" to="/">
+            Home
+          </Link>
+          {links}
+        </div>
+      </div>
     </nav>
+
+    // <p>Strofina Single Lead Scrub</p>
+    // <p>Hi, {props.user.firstname}.</p>
+
+    // <nav>
+    //   <ul>
+    //     <li>
+    //       <Link to="/">Home</Link>
+    //     </li>
+    //     {links}
+    //   </ul>
+    // </nav>
   );
 };
 

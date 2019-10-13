@@ -22,7 +22,7 @@ const Profile = props => {
     e.preventDefault();
     let body = {};
 
-    body.id = props.user.id
+    body.id = props.user.id;
     body.firstname = e.target.firstname.value;
     body.lastname = e.target.lastname.value;
     body.email = e.target.email.value;
@@ -57,56 +57,110 @@ const Profile = props => {
   let stuff;
   if (editMode === true) {
     stuff = (
-      <div>
-        <h2>Edit Form Here</h2>
-        <span className="red">{message}</span>
-        <form onSubmit={handleSubmit}>
-          <input
-            id="agent_id"
-            type="number"
-            name="agent_id"
-            // placeholder="Agent Number"
-            defaultValue={props.user.agent_id}
-          ></input>
-          <input
-            id="agency_id"
-            type="number"
-            name="agency_id"
-            // placeholder="Agency ID"
-            defaultValue={props.user.agency_id}
-          ></input>
-          <input
-            id="firstname"
-            type="text"
-            name="firstname"
-            // placeholder="First Name"
-            defaultValue={props.user.firstname}
-          ></input>
-          <input
-            id="lastname"
-            type="text"
-            name="lastname"
-            // placeholder="Last Name"
-            defaultValue={props.user.lastname}
-          ></input>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            // placeholder="Email Address"
-            defaultValue={props.user.email}
-          ></input>
-          <input
-            id="phonenumber"
-            type="text"
-            name="phonenumber"
-            placeholder={props.phonenumber}
-            defaultValue={props.user.phonenumber}
-          ></input>
-          <button type="submit">
-            Save
-          </button>
-        </form>
+
+<div class="container form-container">
+        <h2>Edit Your Profile</h2>
+        <div class="panel panel-default">
+          <span className="red">{message}</span>
+          <form class="form-horizontal" onSubmit={handleSubmit}>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="agent_id">
+                Agent ID:
+              </label>
+              <div class="col-sm-10">
+                <input
+                  class="form-control"
+                  id="agent_id"
+                  type="number"
+                  name="agent_id"
+                  defaultValue={props.user.agent_id}
+                ></input>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="agency_id">
+                Agency ID:
+              </label>
+              <div class="col-sm-10">
+                <input
+                  class="form-control"
+                  id="agency_id"
+                  type="number"
+                  name="agency_id"
+                  defaultValue={props.user.agency_id}
+                ></input>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="firstname">
+                First Name:
+              </label>
+              <div class="col-sm-10">
+                <input
+                  class="form-control"
+                  id="firstname"
+                  type="text"
+                  name="firstname"
+                  defaultValue={props.user.firstname}
+                ></input>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="lastname">
+                Last Name:
+              </label>
+              <div class="col-sm-10">
+                <input
+                  class="form-control"
+                  id="lastname"
+                  type="text"
+                  name="lastname"
+                  defaultValue={props.user.lastname}
+                ></input>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="email">
+                Email Address:
+              </label>
+              <div class="col-sm-10">
+                <input
+                  class="form-control"
+                  id="email"
+                  type="text"
+                  name="email"
+                  defaultValue={props.user.email}
+                ></input>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="phonenumber">
+                Phone Number:
+              </label>
+              <div class="col-sm-10">
+                <input
+                  class="form-control"
+                  id="phonenumber"
+                  type="text"
+                  name="phonenumber"
+                  placeholder={props.phonenumber}
+                  defaultValue={props.user.phonenumber}
+                ></input>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-primary" type="submit">
+                  Save
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     );
   } else {
