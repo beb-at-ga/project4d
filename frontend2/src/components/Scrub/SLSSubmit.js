@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactTable from 'react-table';
+
 import 'react-table/react-table.css';
 import ReactDOM from 'react-dom';
 
@@ -143,12 +144,12 @@ const SLSSubmit = props => {
   ];
 
   return (
-    <div class="contain form-container">
+    <div className="contain form-container">
       <form onSubmit={handleAdd}>
         {/* <input value={phone} onChange={onChange} /> */}
 
         <input
-          class="add-lead"
+          className="add-lead"
           type="text"
           name="phone"
           value={phone}
@@ -156,7 +157,7 @@ const SLSSubmit = props => {
           onChange={onChange}
         />
         <input
-          class="add-lead"
+          className="add-lead"
           type="text"
           name="lastname"
           value={lastname}
@@ -164,7 +165,7 @@ const SLSSubmit = props => {
           onChange={onChange}
         />
         <input
-          class="add-lead"
+          className="add-lead"
           type="text"
           name="address"
           value={address}
@@ -172,7 +173,7 @@ const SLSSubmit = props => {
           onChange={onChange}
         />
         <input
-          class="add-lead"
+          className="add-lead"
           type="number"
           name="zip"
           value={zip}
@@ -183,7 +184,7 @@ const SLSSubmit = props => {
         <button>Add</button>
       </form>
       {/* <hr /> */}
-      <div class="table-wrapper">
+      <div className="table-wrapper">
         <ReactTable
           id="lead-table"
           data={leads}
@@ -191,10 +192,10 @@ const SLSSubmit = props => {
           defaultPageSize={10}
           minRows={1}
           showPagination={false}
-          className="-striped -highlight"
+          classNameName="-striped -highlight"
         />
       </div>
-      <button class="btn btn-primary">Submit</button>
+      <button className="btn btn-primary">Submit</button>
     </div>
   );
 };

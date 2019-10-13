@@ -6,7 +6,7 @@ import Events from '../Administrator/Events';
 const Admin = props => {
   if (!props.user.id) {
     return <Redirect to="/" />;
-  } 
+  }
 
   if (props.user.id && props.user.isAdmin === false) {
     return (

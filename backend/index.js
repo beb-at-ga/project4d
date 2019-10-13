@@ -40,6 +40,12 @@ app.use("/events", expressJwt({ secret: process.env.JWT_SECRET }),
   require("./controllers/events")
 );
 
+app.use("/agencies", expressJwt({ secret: process.env.JWT_SECRET }),
+  require("./controllers/agencies")
+);
+
+
+
 app.use("/user", expressJwt({ secret: process.env.JWT_SECRET }),
   require("./controllers/user")
 );

@@ -16,13 +16,13 @@ const Nav = props => {
     if (props.user.isAdmin === true) {
       links = (
         <>
-          <Link class="nav-item nav-link" to="/profile">
+          <Link className="nav-item nav-link" to="/profile">
             Profile
           </Link>
-          <Link class="nav-item nav-link" to="/admin">
+          <Link className="nav-item nav-link" to="/admin">
             Admin
           </Link>
-          <Link class="nav-item nav-link" to="/" onClick={handleLogout}>
+          <Link className="nav-item nav-link" to="/" onClick={handleLogout}>
             Logout
           </Link>
         </>
@@ -30,10 +30,10 @@ const Nav = props => {
     } else {
       links = (
         <>
-          <Link class="nav-item nav-link" to="/profile">
+          <Link className="nav-item nav-link" to="/profile">
             Profile
           </Link>
-          <Link class="nav-item nav-link" to="/" onClick={handleLogout}>
+          <Link className="nav-item nav-link" to="/" onClick={handleLogout}>
             Logout
           </Link>
         </>
@@ -42,10 +42,10 @@ const Nav = props => {
   } else {
     links = (
       <>
-        <Link class="nav-item nav-link" to="/signup">
+        <Link className="nav-item nav-link" to="/signup">
           Sign Up
         </Link>
-        <Link class="nav-item nav-link" to="/signin">
+        <Link className="nav-item nav-link" to="/signin">
           Sign In
         </Link>
       </>
@@ -56,7 +56,7 @@ const Nav = props => {
   if (props.user.id) {
     brand = (
       <>
-        <a class="navbar-brand" href="#">
+        <a className="navbar-brand" href="/">
           Strofina Single Lead Scrub
         </a>
       </>
@@ -64,7 +64,7 @@ const Nav = props => {
   } else {
     brand = (
       <>
-        <a class="navbar-brand" href="#">
+        <a className="navbar-brand" href="/">
           Strofina Single Lead Scrub
         </a>
       </>
@@ -72,14 +72,14 @@ const Nav = props => {
   }
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       {brand}
-      <button class="navbar-toggler" type="button" data-toggle="collapse">
-        <span class="navbar-toggler-icon"></span>
+      <button className="navbar-toggler" type="button" data-toggle="collapse">
+        <span className="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <Link class="nav-item nav-link" to="/">
+      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div className="navbar-nav">
+          <Link className="nav-item nav-link" to="/">
             Home
           </Link>
           {links}

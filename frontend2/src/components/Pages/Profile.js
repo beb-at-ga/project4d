@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import BASE_URL from '../../constants';
+import Select from 'react-select';
+
+let agencies = [];
 
 const Profile = props => {
   const [editMode, setEditMode] = useState(false);
   const [message, setMessage] = useState(false);
+  const [agenciesReceived, setAgenciesReveived] = useState(false);
 
   let isAdmin;
   if (props.user.isAdmin) {
@@ -16,6 +20,48 @@ const Profile = props => {
 
   const handleEditMode = () => {
     setEditMode(!editMode);
+  };
+
+  useEffect(() => {
+    if (agenciesReceived === false) {
+      if (editMode === true) {
+        getAgencies();
+      }
+    }
+    // eslint-disable-next-line
+  }, [agenciesReceived, editMode]);
+
+  const getAgencies = () => {
+    let token = localStorage.getItem('authToken');
+    axios
+      .get(`${BASE_URL}/agencies`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(response => {
+        // console.log(response.data);
+
+        response.data.forEach(r => {
+          let t = [{}];
+          t.value = r.id;
+          t.label = r.name;
+
+          agencies.push(t);
+        });
+
+        // const options = [
+        //   { value: r.id, label: r.name },
+        // ]
+
+        setAgenciesReveived(true);
+      })
+      .catch(err => {
+        console.log(err);
+        setMessage(
+          'An error occured. Please try again or contact us for assistance.'
+        );
+      });
   };
 
   const handleSubmit = e => {
@@ -55,10 +101,9 @@ const Profile = props => {
   };
 
   let stuff;
-  if (editMode === true) {
+  if (editMode === true && agenciesReceived === true) {
     stuff = (
-
-<div class="container form-container">
+      <div class="container form-container">
         <h2>Edit Your Profile</h2>
         <div class="panel panel-default">
           <span className="red">{message}</span>
@@ -83,13 +128,18 @@ const Profile = props => {
                 Agency ID:
               </label>
               <div class="col-sm-10">
-                <input
+                <Select
+                  options={agencies}
+                  defaultValue={'225'}
+                  // onChange={handleChange}
+                />
+                {/* <input
                   class="form-control"
                   id="agency_id"
                   type="number"
                   name="agency_id"
                   defaultValue={props.user.agency_id}
-                ></input>
+                ></input> */}
               </div>
             </div>
 

@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 const Footer = props => {
   let footerContent = (
     <>
-      <div class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="navbar-nav">
-          <Link class="nav-item nav-link" to="/help">User Guide</Link>
-          <Link class="nav-item nav-link" to="/privacy">Privacy Policy</Link>
-          <Link class="nav-item nav-link" to="/about">About Strofina</Link>
+      <div className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="navbar-nav">
+          <Link className="nav-item nav-link" to="/help">User Guide</Link>
+          <Link className="nav-item nav-link" to="/privacy">Privacy Policy</Link>
+          <Link className="nav-item nav-link" to="/about">About Strofina</Link>
         </div>
       </div>
     </>
@@ -18,7 +18,7 @@ const Footer = props => {
 
   return (
 
-    <footer class="footer">
+    <footer className="footer">
         <span>{footerContent}</span>
     </footer>
 
