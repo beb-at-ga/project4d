@@ -45,7 +45,6 @@ app.use("/agencies", expressJwt({ secret: process.env.JWT_SECRET }),
 );
 
 
-
 app.use("/user", expressJwt({ secret: process.env.JWT_SECRET }),
   require("./controllers/user")
 );

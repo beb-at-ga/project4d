@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import BASE_URL from '../../constants';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 // import Home from './Home';
 
@@ -43,55 +45,80 @@ const Signup = props => {
     return <Redirect to="/" />;
   } else {
     return (
-      <div>
-        <h2>Signup</h2>
+      <div className="container form-container">
+        <h1>Sign Up</h1>
         <span className="red">{message}</span>
-        <form onSubmit={handleSubmit}>
-          <input
-            id="agent_id"
-            type="number"
-            name="agent_id"
-            placeholder="Agent Number"
-          ></input>
-          <input
-            id="agency_id"
-            type="number"
-            name="agency_id"
-            placeholder="Agency ID"
-          ></input>
-          <input
-            id="firstname"
-            type="text"
-            name="firstname"
-            placeholder="First Name"
-          ></input>
-          <input
-            id="lastname"
-            type="text"
-            name="lastname"
-            placeholder="Last Name"
-          ></input>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="Email Address"
-          ></input>
-          <input
-            id="phonenumber"
-            type="text"
-            name="phonenumber"
-            placeholder="Phone Number"
-          ></input>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            placeholder="Password"
-          ></input>
-          <button type="submit">Signup</button>
-        </form>
+        <Form onSubmit={handleSubmit}>
+
+        <Form.Group controlId="agencyIdInput">
+            <Form.Label>Agency ID</Form.Label>
+            <Form.Control
+              name="agency_id"
+              type="number"
+              placeholder="12345"
+            />
+          </Form.Group>
+
+          <Form.Group controlId="agentIdInput">
+            <Form.Label>Agent ID</Form.Label>
+            <Form.Control
+              name="agent_id"
+              type="number"
+              placeholder="12345"
+            />
+          </Form.Group>
+
+          <Form.Group controlId="emailInput">
+            <Form.Label>Email Address:</Form.Label>
+            <Form.Control
+              name="email"
+              type="email"
+              placeholder="Your email address"
+            />
+          </Form.Group>
+
+
+          <Form.Group controlId="firstnameInput">
+            <Form.Label>First Name</Form.Label>
+            <Form.Control
+              name="firstname"
+              type="text"
+              placeholder="Your first name"
+            />
+          </Form.Group>
+
+          <Form.Group controlId="lastnameInput">
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
+              name="lastname"
+              type="text"
+              placeholder="Your last name"
+            />
+          </Form.Group>
+
+
+          <Form.Group controlId="phonenumberInput">
+            <Form.Label>Phone Number:</Form.Label>
+            <Form.Control
+              name="phonenumber"
+              type="phone"
+              placeholder="+1 (888) 555-1212"
+            />
+          </Form.Group>
+
+          <Form.Group controlId="passwordInput">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control
+              name="password"
+              type="password"
+              placeholder="***********"
+            />
+          </Form.Group>
+          <Button type="submit">Sign Up</Button>
+        </Form>
       </div>
+
+
     );
   }
 };

@@ -3,6 +3,8 @@ import axios from 'axios';
 // import { Redirect } from 'react-router-dom';
 import BASE_URL from '../../constants';
 import { Redirect } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 // import Home from './Home';
 
@@ -28,7 +30,9 @@ const Signup = props => {
       })
       .catch(err => {
         console.log(err);
-        setMessage('An error occured. Please try again or contact us for assistance.')
+        setMessage(
+          'An error occured. Please try again or contact us for assistance.'
+        );
       });
   };
 
@@ -36,24 +40,29 @@ const Signup = props => {
     return <Redirect to="/" />;
   } else {
     return (
-      <div>
+      <div className="container form-container">
         <h2>Sign In</h2>
         <span className="red">{message}</span>
-        <form onSubmit={handleSubmit}>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="Email Address"
-          ></input>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            placeholder="Password"
-          ></input>
-          <button type="submit">Sign In</button>
-        </form>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="emailInput">
+            <Form.Label>Your Email Address:</Form.Label>
+            <Form.Control
+              name="email"
+              type="email"
+              placeholder="name@example.com"
+              defaultValue={props.user.email}
+            />
+          </Form.Group>
+          <Form.Group controlId="passwordInput">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control
+              name="password"
+              type="password"
+              placeholder="***********"
+            />
+          </Form.Group>
+          <Button type="submit">Sign In</Button>
+        </Form>
       </div>
     );
   }

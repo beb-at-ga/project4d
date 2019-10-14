@@ -72,7 +72,7 @@ const Profile = props => {
     body.firstname = e.target.firstname.value;
     body.lastname = e.target.lastname.value;
     body.email = e.target.email.value;
-    body.agency_id = e.target.agency_id.value;
+    // body.agency_id = e.target.agency_id.value;
     body.agent_id = e.target.agent_id.value;
     body.phonenumber = e.target.phonenumber.value;
 
@@ -107,7 +107,7 @@ const Profile = props => {
         <h2>Edit Your Profile</h2>
         <div class="panel panel-default">
           <span className="red">{message}</span>
-          <form class="form-horizontal" onSubmit={handleSubmit}>
+          <form class="form-verticle" onSubmit={handleSubmit}>
             <div class="form-group">
               <label class="control-label col-sm-2" for="agent_id">
                 Agent ID:
@@ -215,7 +215,8 @@ const Profile = props => {
     );
   } else {
     stuff = (
-      <div>
+      <div className="container form-container">
+
         <p>First Name: {props.user.firstname}</p>
         <p>Last Name: {props.user.lastname}</p>
         <p>Phone: {props.user.phonenumber}</p>

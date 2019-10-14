@@ -85,7 +85,7 @@ const Events = props => {
 
   if (eventsReceived === true) {
     return ( 
-      <ReactTable data={events} columns={columns} defaultPageSize={10}/>
+      <ReactTable data={events} columns={columns} defaultPageSize={15}/>
     )
 
   }

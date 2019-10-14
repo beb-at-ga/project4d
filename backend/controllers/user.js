@@ -80,4 +80,43 @@ router.get('/current', (req, res) => {
   }
 });
 
+router.get('/all', (req, res) => {
+  if (!req.user) {
+    res
+      .status(500)
+      .send({ message: 'Something went wrong. Please try again.' });
+  } else {
+    if (req.user.isAdmin) {
+      // find the user the submitted the request and confirm if isAdmin...
+      db.user
+      .findOne({
+        where: { email: req.user.email },
+      })
+      .then(user => {
+        if (user.isAdmin) {
+          db.user
+          .findAll()
+          .then(allUsers => {
+              res.send(allUsers)
+          })
+          .catch(err => {
+            console.log(err)
+            res.send('Error reading database.')
+          })
+        } else {
+          // req.user said they were isAdmin, but the database differs... bug or hack attempt?
+          res.send('unauthorized')
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    } else {
+      res.send('unauthorized')
+    }
+  }
+
+})
+
 module.exports = router;

@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactTable from 'react-table';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios'
+import convertArrayToCSV from 'convert-array-to-csv';
+import Button from 'react-bootstrap/Button'
+
 
 import 'react-table/react-table.css';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 
 const SLSSubmit = props => {
   const [leads, setLeads] = useState([]);
-  const [flipOnLeadsUpdated, setFlipOnLeadsUpdated] = useState(false);
-
-  // useEffect(() => {
-
-  // }, [])
 
   const [phone, setPhone] = useState('');
   const [lastname, setLastname] = useState('');
@@ -39,6 +39,42 @@ const SLSSubmit = props => {
       default:
       // code block
     }
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    const csv = convertArrayToCSV(leads);
+
+
+    let body = new URLSearchParams();
+    body.append('name', 'System');
+    body.append('email', 'dns@strofina.com');
+    body.append('content', csv);
+    body.append('subject', 'Lead Scrub Request');
+
+    const EMAIL_ENDPOINT =
+      'https://6svshijol0.execute-api.us-east-1.amazonaws.com/dev/email/send/formencoded/';
+
+    axios({
+      method: 'post',
+      url: EMAIL_ENDPOINT,
+      data: body,
+      config: {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      },
+    })
+      .then(response => {
+        let t = [];
+        setLeads(t);
+        return <Redirect to="/" />;
+      })
+      .catch(err => {
+        let t = [];
+        setLeads(t);
+        return <Redirect to="/home" />;
+
+      });
   };
 
   const handleAdd = e => {
@@ -80,28 +116,6 @@ const SLSSubmit = props => {
     );
   };
 
-  function handleRemove(row) {
-    let data = leads;
-    console.log('Data Before Splice:', data);
-    data.splice(row.index, 1);
-    console.log('Data After Splice:', data);
-    setLeads(data);
-    console.log('Leads, after setLeads(data):', leads);
-  }
-
-  // const updateStateData = id => {
-  //   let item = data.find(item => item.id == id);
-  //   item.name += " updated 1";
-  //   updateData(data);
-  // };
-
-  // function updateStateData(id){
-  //   return data.map(item => {
-  //     if(item.id !== id) return item
-  //     return {...item, name: item.name + ' updated'}
-  //   })
-  // }
-
   const columns = [
     {
       Header: 'Phone',
@@ -129,12 +143,9 @@ const SLSSubmit = props => {
       Cell: row => (
         <span
           onClick={() => {
-            let data = leads;
-            console.log('Data Before Splice:', data);
+            let data = [...leads];
             data.splice(row.index, 1);
             setLeads(data);
-
-            console.log('"leads", after setLeads(data):', leads);
           }}
         >
           X
@@ -144,15 +155,15 @@ const SLSSubmit = props => {
   ];
 
   return (
-    <div className="contain form-container">
+    <div className="container form-container">
+    <p>Please enter up to 10 leads to scrub. Your results will be emailed to you shortly.</p>
+    <hr/>
       <form onSubmit={handleAdd}>
-        {/* <input value={phone} onChange={onChange} /> */}
-
         <input
           className="add-lead"
           type="text"
           name="phone"
-          value={phone}
+          value={phone || ''}
           placeholder="Phone"
           onChange={onChange}
         />
@@ -160,7 +171,7 @@ const SLSSubmit = props => {
           className="add-lead"
           type="text"
           name="lastname"
-          value={lastname}
+          value={lastname || ''}
           placeholder="Last Name"
           onChange={onChange}
         />
@@ -168,7 +179,7 @@ const SLSSubmit = props => {
           className="add-lead"
           type="text"
           name="address"
-          value={address}
+          value={address || ''}
           placeholder="Address"
           onChange={onChange}
         />
@@ -176,13 +187,14 @@ const SLSSubmit = props => {
           className="add-lead"
           type="number"
           name="zip"
-          value={zip}
+          value={zip || ''}
           placeholder="Zip"
           onChange={onChange}
         />
 
-        <button>Add</button>
+        <Button className="btn btn-secondary" type="submit">Add</Button>
       </form>
+
       {/* <hr /> */}
       <div className="table-wrapper">
         <ReactTable
@@ -195,7 +207,9 @@ const SLSSubmit = props => {
           classNameName="-striped -highlight"
         />
       </div>
-      <button className="btn btn-primary">Submit</button>
+      <Button className="btn btn-primary" onClick={handleSubmit}>
+        Submit
+      </Button>
     </div>
   );
 };
