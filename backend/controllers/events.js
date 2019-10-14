@@ -20,19 +20,18 @@ const jwt = require('jsonwebtoken');
 // }
 
 router.get('/', (req, res) => {
-  db.event.findAll({
-    include: [db.user]
-  })
-  .then(results => {
-    res.send(results)
-  })
-  .catch(err => {
-    console.log(`Error accessing database: ${err}`);
-    res.send('error');
-  })
-
+  db.event
+    .findAll({
+      include: [db.user],
+      order: [['id', 'DESC']],
+    })
+    .then(results => {
+      res.send(results);
+    })
+    .catch(err => {
+      console.log(`Error accessing database: ${err}`);
+      res.send('error');
+    });
 });
 
 module.exports = router;
-
-
