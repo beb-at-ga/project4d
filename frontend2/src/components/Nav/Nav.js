@@ -57,7 +57,7 @@ const Nav = props => {
     brand = (
       <>
         <a className="navbar-brand" href="/">
-          Strofina Single Lead Scrub
+          Single Lead Scrub
         </a>
       </>
     );
@@ -65,7 +65,7 @@ const Nav = props => {
     brand = (
       <>
         <a className="navbar-brand" href="/">
-          Strofina Single Lead Scrub
+          Single Lead Scrub
         </a>
       </>
     );
@@ -87,7 +87,7 @@ const Nav = props => {
       </div>
     </nav>
 
-    // <p>Strofina Single Lead Scrub</p>
+    // <p>Single Lead Scrub</p>
     // <p>Hi, {props.user.firstname}.</p>
 
     // <nav>

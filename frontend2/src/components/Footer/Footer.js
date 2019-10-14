@@ -10,7 +10,7 @@ const Footer = props => {
         <div className="navbar-nav">
           <Link className="nav-item nav-link" to="/help">User Guide</Link>
           <Link className="nav-item nav-link" to="/privacy">Privacy Policy</Link>
-          <Link className="nav-item nav-link" to="/about">About Strofina</Link>
+          <Link className="nav-item nav-link" to="/about">About Single Lead Scrub</Link>
         </div>
       </div>
     </>

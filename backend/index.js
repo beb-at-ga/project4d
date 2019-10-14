@@ -24,7 +24,7 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.send("hello");
+  res.send("loading...");
 });
 
 app.use("/auth", expressJwt({ secret: process.env.JWT_SECRET }).unless({
